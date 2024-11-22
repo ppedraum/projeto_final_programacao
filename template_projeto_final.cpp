@@ -53,11 +53,12 @@ public:
 // Rafael oi
 class Usuario {
 protected:
-    int id, limiteEmprestimos, emprestimosAtuais;
-    string nome;
+    int id_, limiteEmprestimos_, emprestimosAtuais_;
+    string nome_;
 
 public:
-    Usuario(int id, string nome, int limiteEmprestimos);
+    Usuario(int id, string nome, int limiteEmprestimos):
+	id_(id), nome_(nome), limiteEmprestimos_(limiteEmprestimos{};
         
     virtual void exibirUsuario(){
 	};
