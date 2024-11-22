@@ -50,7 +50,7 @@ public:
 	};
 };
 
-// Rafael
+// Rafael oi
 class Usuario {
 protected:
     int id, limiteEmprestimos, emprestimosAtuais;
