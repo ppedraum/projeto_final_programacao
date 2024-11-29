@@ -158,62 +158,66 @@ public:
 		}	
 	};
     void adicionarUsuario(){
-    	int opcao;
+    	int opcao, id;
+    	string nome;
+    	do {
+    		cout << "-------------------------" << endl;
+    		cout << "1. Adicionar professor"    << endl;
+    		cout << "2. Adicionar aluno"    << endl;
+    		cout << "0. Voltar"    << endl;
+    		cout << endl;
+			cout << "Digite: "    << endl;
+			cin >> opcao; 
+			cout << "-------------------------" << endl;
     	
-    	cout << "-------------------------" << endl;
-    	cout << "1. Adicionar professor"    << endl;
-    	cout << "2. Adicionar aluno"    << endl;
-    	cout << "0. Sair"    << endl;
-    	cout << endl;
-    	cout << "Digite: "    << endl;
-    	cin >> opcao; 
-    	cout << "-------------------------" << endl;
-    	
-    	if ( opcao == 1){
-    	int id; 
-		string nome;
+    	switch (opcao){
+    		case 1 :
+    			cout << "Digite o ID do professor: ";
+				cin  >> id;    	
+		
+				cout << "Digite o nome do professor: ";
+				cin  >> nome;
+				professores_.push_back(Professor(id, nome));
+		
+				cout << "Professor cadastrado com sucesso! " << endl;
+				break;
 			
-		cout << "Digite o ID do professor: ";
-		cin  >> id;    	
+			case 2:
+				cout << "Digite o ID do aluno: ";
+				cin  >> id;    	
 		
-		cout << "Digite o nome do professor: ";
-		cin  >> nome;
-		professores_.push_back(Professor(id, nome));
+				cout << "Digite o nome do aluno: ";
+				cin  >> nome;
+				alunos_.push_back(Aluno(id, nome));
 		
-		cout << "Professor cadastrado com sucesso! " << endl;
+				cout << "Aluno cadastrado com sucesso! " << endl;
+				break;
+				
+			case 0:
+				cout << "Voltando..." << endl;
+				break;
+				
+			default:
+    			cout << "Por favor digite uma das opcoes!" << endl;
 		}
+	}
+			while(opcao !=0);
 		
-		else if (opcao == 2){
-		int id; 
-		string nome;
-			
-		cout << "Digite o ID do aluno: ";
-		cin  >> id;    	
-		
-		cout << "Digite o nome do aluno: ";
-		cin  >> nome;
-		alunos_.push_back(Aluno(id, nome));
-		
-		cout << "Aluno cadastrado com sucesso! " << endl;
-		}
-		
-		
-		else {
-			cout << "Saindo do sistema..." << endl;
-		}
 	};
+	
     void listarUsuarios(){
-    	cout << "-------------------------" << endl;
-    	cout << "Professores: " << endl;
-    	cout << "-------------------------" << endl;
+    		cout << "-------------------------" << endl;
+    		cout << "Professores: " << endl;
+    		cout << "-------------------------" << endl;
+    	
     	for (int i = 0; i < professores_.size(); i++){
     		professores_[i].exibirUsuario();
 		}
-    	cout << "-------------------------" << endl;
-    	cout << endl;
-    	cout << "-------------------------" << endl;
-    	cout << "Alunos: " << endl;
-    	cout << "-------------------------" << endl;
+    		cout << "-------------------------" << endl;
+    		cout << endl;
+    		cout << "-------------------------" << endl;
+    		cout << "Alunos: " << endl;
+    		cout << "-------------------------" << endl;
     	for (int i = 0; i < alunos_.size(); i++){
     		alunos_[i].exibirUsuario();
 		}
