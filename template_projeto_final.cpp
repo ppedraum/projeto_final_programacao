@@ -58,9 +58,16 @@ protected:
 
 public:
     Usuario(int id, string nome, int limiteEmprestimos):
-	id_(id), nome_(nome), limiteEmprestimos_(limiteEmprestimos{};
-        
+	id_(id), nome_(nome), limiteEmprestimos_(limiteEmprestimos){};
+    
+    Usuario(int id, string nome):
+	id_(id), nome_(nome){};
+	
+
     virtual void exibirUsuario(){
+    	cout << "ID: " << id_ << endl;
+    	cout << "Nome: " << nome_ << endl;
+    	cout << "Limite de empréstimos: " << limiteEmprestimos_ << endl;
 	};
 
     bool podeEmprestar();
@@ -71,12 +78,24 @@ public:
 
 class Aluno : public Usuario {
 public:
-    Aluno(int id, string nome);
+    Aluno(int id, string nome):
+	Usuario(id, nome){};
+	
+	void exibirUsuario() override {
+		cout << "ID: " << id_ << endl;
+    	cout << "Nome: " << nome_ << endl;
+	};
 };
 
 class Professor : public Usuario {
 public:
-    Professor(int id, string nome);
+    Professor(int id, string nome):
+	Usuario(id, nome){};
+	
+	void exibirUsuario() override {
+		cout << "ID: " << id_ << endl;
+    	cout << "Nome: " << nome_ << endl;
+	};
 };
 
 // Todo
@@ -119,8 +138,66 @@ public:
     		
 		}	
 	};
-    void adicionarUsuario();
-    void listarUsuarios();
+    void adicionarUsuario(){
+    	int opcao;
+    	
+    	cout << "-------------------------" << endl;
+    	cout << "1. Adicionar professor"    << endl;
+    	cout << "2. Adicionar aluno"    << endl;
+    	cout << "0. Sair"    << endl;
+    	cout << endl;
+    	cout << "Digite: "    << endl;
+    	cin >> opcao; 
+    	cout << "-------------------------" << endl;
+    	
+    	if ( opcao == 1){
+    	int id; 
+		string nome;
+			
+		cout << "Digite o ID do professor: ";
+		cin  >> id;    	
+		
+		cout << "Digite o nome do professor: ";
+		cin  >> nome;
+		professores_.push_back(Professor(id, nome));
+		
+		cout << "Professor cadastrado com sucesso! " << endl;
+		}
+		
+		else if (opcao == 2){
+		int id; 
+		string nome;
+			
+		cout << "Digite o ID do aluno: ";
+		cin  >> id;    	
+		
+		cout << "Digite o nome do aluno: ";
+		cin  >> nome;
+		alunos_.push_back(Aluno(id, nome));
+		
+		cout << "Aluno cadastrado com sucesso! " << endl;
+		}
+		
+		
+		else {
+			cout << "Saindo do sistema..." << endl;
+		}
+	};
+    void listarUsuarios(){
+    	cout << "-------------------------" << endl;
+    	cout << "Professores: " << endl;
+    	for (int i = 0; i < professores_.size(); i++){
+    		professores_[i].exibirUsuario();
+		}
+    	cout << "-------------------------" << endl;
+    	cout << endl;
+    	cout << "-------------------------" << endl;
+    	cout << "Alunos: " << endl;
+    	for (int i = 0; i < alunos_.size(); i++){
+    		alunos_[i].exibirUsuario();
+		}
+		cout << "-------------------------" << endl;
+	};
     //Pedro
     void emprestarLivro();
     void devolverLivro();
@@ -155,8 +232,10 @@ public:
     				listarLivros();
     				break;
     			case 3:
+    				adicionarUsuario();
     				break;
     			case 4:
+    				listarUsuarios();
     				break;
     			case 5:
     				break;
