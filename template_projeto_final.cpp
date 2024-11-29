@@ -212,6 +212,7 @@ public:
     	
     	for (int i = 0; i < professores_.size(); i++){
     		professores_[i].exibirUsuario();
+    		cout << endl;
 		}
     		cout << "-------------------------" << endl;
     		cout << endl;
@@ -220,6 +221,7 @@ public:
     		cout << "-------------------------" << endl;
     	for (int i = 0; i < alunos_.size(); i++){
     		alunos_[i].exibirUsuario();
+    		cout << endl;
 		}
 	};
     //Pedro
