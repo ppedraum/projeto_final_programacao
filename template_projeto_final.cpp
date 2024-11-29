@@ -53,7 +53,7 @@ public:
 // Rafael oi
 class Usuario {
 protected:
-    int id_, limiteEmprestimos_, emprestimosAtuais_;
+    int id_, limiteEmprestimos_, emprestimosAtuais_=0;
     string nome_;
 
 public:
@@ -70,31 +70,50 @@ public:
     	cout << "Limite de empréstimos: " << limiteEmprestimos_ << endl;
 	};
 
-    bool podeEmprestar();
-    void realizarEmprestimo();
-    void realizarDevolucao();
-    int getId();
+    bool podeEmprestar(){
+    	if (limiteEmprestimos_ > 0 && getId() == id_){
+    		return true;
+		}
+	};
+    void realizarEmprestimo(){
+    	if (podeEmprestar()==true ){
+    		limiteEmprestimos_ -=1;
+    		emprestimosAtuais_ +=1;
+		}
+	};
+    void realizarDevolucao(){
+    	if (emprestimosAtuais_ !=0){
+    		limiteEmprestimos_ +=1;
+		}
+    	
+	};
+	
+    int getId(){
+    	return id_;
+	};
 };
 
 class Aluno : public Usuario {
 public:
     Aluno(int id, string nome):
-	Usuario(id, nome){};
+	Usuario(id, nome,limiteEmprestimos_=4){};
 	
 	void exibirUsuario() override {
 		cout << "ID: " << id_ << endl;
     	cout << "Nome: " << nome_ << endl;
+    	cout << "Limite de emprestimos: " << limiteEmprestimos_ << endl;
 	};
 };
 
 class Professor : public Usuario {
 public:
     Professor(int id, string nome):
-	Usuario(id, nome){};
+	Usuario(id, nome, limiteEmprestimos_=5){};
 	
 	void exibirUsuario() override {
 		cout << "ID: " << id_ << endl;
     	cout << "Nome: " << nome_ << endl;
+    	cout << "Limite de emprestimos: " << limiteEmprestimos_ << endl;
 	};
 };
 
@@ -186,6 +205,7 @@ public:
     void listarUsuarios(){
     	cout << "-------------------------" << endl;
     	cout << "Professores: " << endl;
+    	cout << "-------------------------" << endl;
     	for (int i = 0; i < professores_.size(); i++){
     		professores_[i].exibirUsuario();
 		}
@@ -193,13 +213,15 @@ public:
     	cout << endl;
     	cout << "-------------------------" << endl;
     	cout << "Alunos: " << endl;
+    	cout << "-------------------------" << endl;
     	for (int i = 0; i < alunos_.size(); i++){
     		alunos_[i].exibirUsuario();
 		}
-		cout << "-------------------------" << endl;
 	};
     //Pedro
-    void emprestarLivro();
+    void emprestarLivro(){
+    	
+	};
     void devolverLivro();
     //Pedro
     void menu(){
